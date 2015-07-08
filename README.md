@@ -4,3 +4,5 @@
 #git learn address ->  http://www.cnblogs.com/wang_yb/p/3867221.html
 
 #add zhangxiangsong ssh keys
+
+#测试中文支持情况

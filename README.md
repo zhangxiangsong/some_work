@@ -5,4 +5,9 @@
 
 #add zhangxiangsong ssh keys
 
-#测试中文支持情况
+
+
+
+// 针对各目录做简要介绍
+
+document    --->  各种技术类的文档，以及一些重要的文档，word 或者文本文件

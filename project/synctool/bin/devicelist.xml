@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+	<!--服务器使用本配置文件管理所有的设备
+		请谨慎编辑该配置文件
+		每个站点的端口映射地址从20000开始编号
+		每个站点的设备内网地址从192.168.1.2开始编号
+		一个节点代表一个站点，即由一台路由器和若干G4420设备组成的局域网
+
+		如果一个站点有N台设备，则按照以下格式列出N台设备的ip地址和虚拟端口号
+
+		<device1 dev_port="20000" devicename="广州天河-01"></device1>
+	 -->
+	<public>
+		<node_num desc="站点个数">1</node_num>
+		<server_extip desc="表示运行本软件的服务器外网地址">192.168.2.17</server_extip>
+		<rootdir_win desc="windows服务器存储数据的根目录">D:/data</rootdir_win>
+		<rootdir_linux desc="linux服务器存储数据的根目录">/data</rootdir_linux>
+		<remoterootdir desc="G4420数据存储根目录">/Storage Card/export</remoterootdir>
+		<timeout desc="ftp连接设备超时时间，单位s">5</timeout>
+		<max_sync_day desc="每次访问同步目录最近的天数，以提高性能，首次运行服务器设置为0以获取全部数据">4</max_sync_day>
+        <max_local_day desc="本地最多保留的数据天数，循环删除旧文件，该值要大于 max_sync_day">5</max_local_day>
+		<check_circle desc="多久进行一次数据同步操作，默认15min，单位s">5</check_circle>
+		<per_thread_dostation_count desc="每个线程处理的站点的个数">8</per_thread_dostation_count>
+	</public>
+    <station1>
+        <node_devce_num desc="一个站点拥有几台设备">1</node_devce_num>
+        <station_name desc="东莞220KV则徐站" name="广州变1"></station_name>
+        <device1 dev_extip="192.168.27.35" dev_port="21" devicename="tianhe-01" localname="则徐站-则路甲线124"></device1>
+    </station1>
+</root>

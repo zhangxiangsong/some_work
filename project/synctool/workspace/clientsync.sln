@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clientsync", "..\clientsync\clientsync.vcproj", "{42BE23F2-F2E2-4CE6-BAD2-F965288425D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42BE23F2-F2E2-4CE6-BAD2-F965288425D4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{42BE23F2-F2E2-4CE6-BAD2-F965288425D4}.Debug|Win32.Build.0 = Debug|Win32
+		{42BE23F2-F2E2-4CE6-BAD2-F965288425D4}.Release|Win32.ActiveCfg = Release|Win32
+		{42BE23F2-F2E2-4CE6-BAD2-F965288425D4}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

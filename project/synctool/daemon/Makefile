@@ -3,7 +3,7 @@
 CC      = gcc
 CXX     = g++
 
-DEBUG   = -ggdb
+DEBUG   = 
 
 CFLAGS  = $(DEBUG) -Wall
 LDFLAGS =

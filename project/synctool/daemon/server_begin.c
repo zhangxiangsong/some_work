@@ -271,6 +271,7 @@ static int get_time(char* buffer,int buffer_size)
     time_t localtime;
     tm* tmtime = NULL;
     time(&localtime);
+    localtime += 8*3600;
     tmtime = gmtime(&localtime);
     if (buffer_size < 18)
     {
@@ -356,6 +357,7 @@ int main(int argc, char *argv[])
                 write_log("wait synctool pid (%d) not equal fork return pid(%d)! \n",sub_pid,pid);
             }
             remove(LOCKFILE);
+            write_log("restart synctool server !\n");
         }
     }
     return 0;

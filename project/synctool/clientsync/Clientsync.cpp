@@ -76,6 +76,8 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	MCD_STR devicefile = MCD_STR(argv[1]);
+	
+	SetCurrentPath(devicefile);
 
 	devicefile += MCD_STR("devicelist.xml");
 #endif

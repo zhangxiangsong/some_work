@@ -9,13 +9,16 @@
 #include <unistd.h>        /* for convenience */
 #include <signal.h>        /* for SIG_ERR */
 #include <syslog.h>
+#include <time.h>
 #include <fcntl.h>
 #include <sys/resource.h>
+#include <sys/wait.h>
 #include <errno.h>         /* for definition of errno */
 #include <stdarg.h>        /* ISO C variable aruments */
 
 
 #define MAXLINE 4096            /* max line length */
+#define BUFSIZE 256
 
 /*
  * Print a message and return to caller.
@@ -157,50 +160,35 @@ int lockfile(int fd)
     return(fcntl(fd, F_SETLK, &fl));
 }
 
-#define LOGNAME  (char*)"/home/zhangxs/Desktop/log.txt"
 
-int write_log(const char* log)
+static char log_name[BUFSIZE];
+
+int write_log(const char *fmt, ...)
 {
-    int fd = open(LOGNAME,O_RDWR | O_CREAT | O_EXCL, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
+    va_list ap;
+    va_start(ap,fmt);
+    char buf[MAXLINE];
+    vsnprintf(buf, MAXLINE,fmt,ap);
+    
+    int fd = open(log_name,O_RDWR | O_CREAT | O_EXCL, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
     if (fd < 0)
     {
         /// 表示文件不存在
         /// 
-        fd = open(LOGNAME,O_RDWR | O_CREAT, S_IWUSR | S_IRUSR);
+        fd = open(log_name,O_RDWR | O_CREAT, S_IWUSR | S_IRUSR);
         if (fd < 0)
         {
+            va_end(ap);
             return -1;
         }
     }
     lseek(fd,0,SEEK_END);
-    write(fd,log,strlen(log));
+    write(fd,buf,strlen(buf));
     close(fd);
+    va_end(ap);
     return 0;
 }
-/*
-int write_log_file(const char* filename,const char* log)
-{
-    int fd = open(filename,O_RDWR | O_CREAT | O_EXCL, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
-    if (fd < 0)
-    {
-        /// 表示文件不存在
-        /// 
-        fd = open(filename,O_RDWR | O_CREAT, S_IWUSR | S_IRUSR);
-        if (fd < 0)
-        {
-            return -1;
-        }
-    }
-    else
-    {
-        remove(filename);
-    }
-    lseek(fd,0,SEEK_END);
-    write(fd,log,strlen(log));
-    close(fd);
-    return 0;
-}
-*/
+
 int record_pid(char* filename)
 {
     int fd;
@@ -278,6 +266,22 @@ void sigterm_handle(int arg)
     exit(1);
 }
 
+static int get_time(char* buffer,int buffer_size)
+{
+    time_t localtime;
+    tm* tmtime = NULL;
+    time(&localtime);
+    tmtime = gmtime(&localtime);
+    if (buffer_size < 18)
+    {
+        return -1;
+    }
+    memset(buffer,0,buffer_size);
+    sprintf(buffer, "%d%02d%02d %02d:%02d:%02d",
+        tmtime->tm_year + 1900,tmtime->tm_mon + 1,tmtime->tm_mday,tmtime->tm_hour, tmtime->tm_min, tmtime->tm_sec);
+    return 0;
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -290,23 +294,25 @@ int main(int argc, char *argv[])
     else
         cmd++;
 
-    printf("server_begin program name :%s\n",cmd);
-    //remove(LOGNAME);
-
-    const int   size = 256;
     const char* server_name = "synctool";
-    char path[size];
-    char server_path[size];
-    memset(path,0,size);
-    memset(server_path,0,size);
-    getcwd(path,size);
+    char path[BUFSIZE];
+    char server_path[BUFSIZE];
+    memset(path,0,BUFSIZE);
+    memset(server_path,0,BUFSIZE);
+    getcwd(path,BUFSIZE);
     strcat(path,"/");
-    memcpy(server_path,path,size);
+    memcpy(server_path,path,BUFSIZE);
     strcat(server_path,server_name);
 
-    printf("server path : %s\n",path);
+    memcpy(log_name,path,BUFSIZE);
+    strcat(log_name,"daemon_log.txt");
+
+    char now_time[40];
+    get_time(now_time,40);
+    write_log("synctool daemon start time : %s\n",now_time);
 
     /// 先判断守护进程是否已经运行
+    /// 
     if(just_running(LOCKDAEM,NULL) == 0)
     {
         printf("the sync_daemon is already running !\n");
@@ -329,7 +335,7 @@ int main(int argc, char *argv[])
         pid_t pid;
         if((pid = fork()) < 0)
         {
-            write_log("fork error\n");
+            write_log("fork error !\n");
         }
         else if(pid == 0)
         {
@@ -340,29 +346,16 @@ int main(int argc, char *argv[])
                     write_log(strerror(errno));
                     remove(LOCKFILE);
                 }
-                else
-                {
-                    write_log("start synctool server successed !\n");
-                }
-                write_log("kill server successed !\n");
-                remove(LOCKFILE);
-/*
-                int sync_pid;
-                if(just_running(LOCKFILE,&sync_pid) == 0)
-                {
-                    /// 表示synctool进程正在运行
-                    
-                    if(kill(sync_pid,SIGINT) == 0)
-                    {
-                        write_log("kill server successed !\n");
-                    }
-                    remove(LOCKFILE);
-                }*/
             }
         }
         else
         {
-            //sleep(10);
+            pid_t sub_pid = wait(NULL);
+            if (sub_pid != pid)
+            {
+                write_log("wait synctool pid (%d) not equal fork return pid(%d)! \n",sub_pid,pid);
+            }
+            remove(LOCKFILE);
         }
     }
     return 0;

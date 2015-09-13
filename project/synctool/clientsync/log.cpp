@@ -51,7 +51,17 @@ static bool StringReplace( std::string& str,std::string lhs,std::string rhs )
 	}
 	return true;
 }
+
+#else
+
+static std::string linux_str;
+void SetCurrentPath(std::string path)
+{
+	linux_str = path;
+}
 #endif
+
+
 static std::string ModuleDir()
 {
 	std::string ret;
@@ -70,17 +80,17 @@ static std::string ModuleDir()
 	ret += "/log/";
 	CreateFolder(S2ws(ret));
 #else
-	const int size = 256;
-	char path[size];
-	getcwd(path,size);
-	ret = path;
-	ret += "/log/";
+	ret = linux_str;
+	ret += "log/";
 	CreateFolder(ret);
 #endif
 	return ret;
 }
 
 static Lock localLock;
+
+
+
 
 static  bool SaveFile(std::string path, size_t start, size_t len, const char* content)
 {
@@ -165,9 +175,9 @@ std::string DelLog::LogFilePath()
 {
     std::string s;
     if (m_useErrFile)
-        s = ModuleDir() + "Erro" + GetCurrentDate() + ".log";
+        s = ModuleDir() + "Erro" + GetCurrentDate() + ".txt";
     else
-        s = ModuleDir() + "Info" + GetCurrentDate() + ".log";
+        s = ModuleDir() + "Info" + GetCurrentDate() + ".txt";
 	//printf("%s\n",s.c_str());
     return s;
 }

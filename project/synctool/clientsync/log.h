@@ -68,6 +68,8 @@ protected:
 
 #else
 
+void SetCurrentPath(std::string path);
+
 #define Log_Print0(mode,format)   \
 	do {\
 	MCD_STR __info; \

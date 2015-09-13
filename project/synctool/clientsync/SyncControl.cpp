@@ -147,7 +147,11 @@ bool exSyncControl::DeviceSync(CURL* mCurlcontrol,char* buffer,int buffer_size)
 	if (res != CURLE_OK)
 	{
 		Log_Print1(PRINT_STOR,"get date dir(%s) failed.\n",MCD_2PCSZ(stationurl));
-		Log_Print1(PRINT_STOR,"curl told us (%s).\n",MCD_2PCSZ(S2ws(curl_easy_strerror(res))));
+		Log_Print2(PRINT_STOR,"curl told us (code:%d) (%s).\n",res,MCD_2PCSZ(S2ws(curl_easy_strerror(res))));
+		if (res == CURLE_FTP_PORT_FAILED)
+		{
+			exit(30);
+		}
 		return false;
 	}
 	std::string station = &buffer[0];
@@ -237,7 +241,11 @@ bool exSyncControl::DeviceSync(CURL* mCurlcontrol,char* buffer,int buffer_size)
 		if (res != CURLE_OK)
 		{
 			Log_Print1(PRINT_STOR,"get remote file list (%s) failed.\n",MCD_2PCSZ(Ws2s(dirurl)));
-			Log_Print1(PRINT_STOR,"curl told us (%s).\n",MCD_2PCSZ(S2ws(curl_easy_strerror(res))));
+			Log_Print2(PRINT_STOR,"curl told us code(%d) (%s).\n",res,MCD_2PCSZ(S2ws(curl_easy_strerror(res))));
+			if (res == CURLE_FTP_PORT_FAILED)
+			{
+				exit(30);
+			}
 		}
 		SetStringList datafilelist;
 		std::string datafile = &buffer[0];
@@ -260,7 +268,7 @@ bool exSyncControl::DeviceSync(CURL* mCurlcontrol,char* buffer,int buffer_size)
 			res = curl_easy_perform(mCurlcontrol);
 			if (res != CURLE_OK)
 			{
-				Log_Print1(PRINT_STOR,"get remote file failed,curl told us %s\n",curl_easy_strerror(res));
+				Log_Print2(PRINT_STOR,"get remote file failed,curl told us code(%d) %s\n",res,curl_easy_strerror(res));
 			}
 			else
 			{

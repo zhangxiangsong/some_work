@@ -1,0 +1,49 @@
+﻿2016-10-14 10:57:18,449 [8332] INFO  GameService - Session: 016cc151-9b50-4435-b161-e5f5c6b058b6/127.0.0.1:52966
+A new session connected!
+2016-10-14 10:57:24,605 [5864] INFO  GameService - Session: 016cc151-9b50-4435-b161-e5f5c6b058b6/127.0.0.1:52966
+This session was closed for ClientClosing!
+2016-10-14 10:59:37,742 [14488] INFO  GameService - Session: 7cfbe981-b070-49a0-ae7c-377557e95338/127.0.0.1:53221
+A new session connected!
+2016-10-14 11:00:16,159 [9612] INFO  GameService - Session: 7cfbe981-b070-49a0-ae7c-377557e95338/127.0.0.1:53221
+This session was closed for ClientClosing!
+2016-10-14 11:00:42,842 [14488] INFO  GameService - Session: 7aafb2e2-e142-4865-9ff1-d4176fc6fbb0/127.0.0.1:53344
+A new session connected!
+2016-10-14 11:00:46,677 [9612] INFO  GameService - Session: 7aafb2e2-e142-4865-9ff1-d4176fc6fbb0/127.0.0.1:53344
+This session was closed for ClientClosing!
+2016-10-14 11:04:44,619 [14488] INFO  GameService - Session: b49d986f-ad56-49e2-8426-d65b64e786d5/127.0.0.1:53788
+A new session connected!
+2016-10-14 11:04:48,961 [14452] INFO  GameService - Session: b49d986f-ad56-49e2-8426-d65b64e786d5/127.0.0.1:53788
+This session was closed for ClientClosing!
+2016-10-14 11:08:38,579 [13176] INFO  GameService - Session: 7b286f37-0a18-4cbe-966d-40e24d3550b5/127.0.0.1:54223
+A new session connected!
+2016-10-14 11:11:29,148 [11816] INFO  GameService - Session: 7b286f37-0a18-4cbe-966d-40e24d3550b5/127.0.0.1:54223
+This session was closed for ClientClosing!
+2016-10-14 11:11:41,336 [13176] INFO  GameService - Session: 8cc60adc-872c-40df-9469-ff9d5ea32a70/127.0.0.1:54556
+A new session connected!
+2016-10-14 11:12:15,170 [13836] INFO  GameService - Session: 8cc60adc-872c-40df-9469-ff9d5ea32a70/127.0.0.1:54556
+This session was closed for ClientClosing!
+2016-10-14 11:12:52,963 [3100] INFO  GameService - Session: ffcc2e5f-b192-4418-a9bc-b0048eeba5b7/127.0.0.1:54685
+A new session connected!
+2016-10-14 11:13:06,086 [11816] INFO  GameService - Session: ffcc2e5f-b192-4418-a9bc-b0048eeba5b7/127.0.0.1:54685
+This session was closed for ClientClosing!
+2016-10-14 11:15:59,422 [3100] INFO  GameService - Session: a26cf8b1-d963-428d-90a6-57b8fd1fac4e/127.0.0.1:55019
+A new session connected!
+2016-10-14 11:16:23,074 [356] INFO  GameService - Session: a26cf8b1-d963-428d-90a6-57b8fd1fac4e/127.0.0.1:55019
+This session was closed for ClientClosing!
+2016-10-14 11:16:48,895 [11428] INFO  GameService - Session: 2dd4f2b3-9e64-48fe-b7c5-e2d7dd55ee05/127.0.0.1:55112
+A new session connected!
+2016-10-14 11:17:44,338 [5740] INFO  GameService - Session: 2dd4f2b3-9e64-48fe-b7c5-e2d7dd55ee05/127.0.0.1:55112
+This session was closed for ClientClosing!
+2016-10-14 11:18:16,897 [14684] INFO  GameService - Session: 33f10779-1f8e-4edf-852b-2e19b7c52983/127.0.0.1:55280
+A new session connected!
+2016-10-14 11:19:14,966 [13836] INFO  GameService - Session: 33f10779-1f8e-4edf-852b-2e19b7c52983/127.0.0.1:55280
+This session was closed for ClientClosing!
+2016-10-14 11:45:11,910 [11828] INFO  GameService - Session: ceeb46d4-74f3-4bb5-9668-c7590140f903/127.0.0.1:58343
+A new session connected!
+2016-10-14 11:45:32,755 [13836] INFO  GameService - Session: ceeb46d4-74f3-4bb5-9668-c7590140f903/127.0.0.1:58343
+This session was closed for ClientClosing!
+2016-10-14 11:48:33,167 [9988] INFO  GameService - Session: 26a5339e-a5cf-4123-a784-27a7486a8531/127.0.0.1:58648
+A new session connected!
+2016-10-14 13:30:54,832 [15600] INFO  GameService - Session: 26a5339e-a5cf-4123-a784-27a7486a8531/127.0.0.1:58648
+This session was closed for ClientClosing!
+2016-10-14 13:51:43,951 [10792] INFO  GameService - The server instance GameService has been stopped!
